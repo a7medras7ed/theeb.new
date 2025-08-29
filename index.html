@@ -25,18 +25,29 @@
 
     /* Modal */
     .modal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);justify-content:center;align-items:center;}
-    .modal-content {position:relative;padding:90px 20px 20px;border-radius:16px;max-width:400px;width:90%;transition:0.3s;color:#fff;text-align:center;overflow:visible;}
+    .modal-content {
+      position:relative;
+      padding:100px 20px 30px 20px; /* مساحة فوق للصورة */
+      border-radius:16px;
+      max-width:420px;
+      max-height:90vh;   /* ما يتعداش الشاشة */
+      overflow-y:auto;   /* Scroll داخلي */
+      width:95%;
+      color:#fff;
+      text-align:center;
+      overflow-x:hidden;
+    }
     .dark-mode .modal-content {background:#2a2a2a;color:#fff;}
     .close-btn {margin-top:15px;padding:8px 14px;border:none;border-radius:8px;background:#2A4D9B;color:#fff;cursor:pointer;}
 
     /* صورة دائرية Pop-Out */
     .profile-pic {
-      width:110px;
-      height:110px;
+      width:120px;
+      height:120px;
       border-radius:50%;
-      border:4px solid #fff;
+      border:5px solid #fff;
       position:absolute;
-      top:-55px;
+      top:-60px; /* نصها فوق البطاقة */
       left:50%;
       transform:translateX(-50%);
       object-fit:cover;
@@ -84,7 +95,7 @@
     .rank-ssvipsilver  { background:linear-gradient(135deg,#cfd8dc,#b0bec5,#90a4ae); color:#000; }
     .rank-ssvipgold    { background:linear-gradient(135deg,#ffd700,#f9a825,#ff6f00); color:#000; }
 
-    /* 🌟 Pulse Glow للـ Watermark + Glow Pop-Out للصورة */
+    /* 🌟 Pulse Glow متزامن (Watermark + صورة) */
     .rank-beginner #modalWatermark, .rank-beginner .profile-pic { animation: pulseGray 3s ease-in-out infinite; }
     @keyframes pulseGray { 0%,100% { color:#999; box-shadow:0 0 10px #aaa,0 0 20px #666; } 50% { color:#eee; box-shadow:0 0 20px #fff,0 0 35px #ccc; } }
 
@@ -149,7 +160,7 @@
   <!-- Modal -->
   <div class="modal" id="profileModal">
     <div class="modal-content" id="modalCard">
-      <img src="https://via.placeholder.com/110" id="modalImage" class="profile-pic" alt="الصورة">
+      <img src="https://via.placeholder.com/120" id="modalImage" class="profile-pic" alt="الصورة">
       <h2 id="modalName"></h2>
       <p><b>UID:</b> <span id="modalUID"></span></p>
       <p><b>Likee ID:</b> <span id="modalLikee"></span></p>
@@ -214,7 +225,7 @@
           tr.dataset.hours=b.hours;
           tr.dataset.days=b.days;
           tr.dataset.invites=b.invites;
-          tr.dataset.image=b.image || "https://via.placeholder.com/110";
+          tr.dataset.image=b.image || "https://via.placeholder.com/120";
           tr.innerHTML=`<td>${b.name}</td><td>${b.uid}</td><td>${b.likee}</td>`;
           tbody.appendChild(tr);
         });
