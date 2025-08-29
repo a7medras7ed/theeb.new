@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>📢 حدث الترقيات</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {font-family:'Cairo',sans-serif;background:#f9f9fb;color:#333;margin:0;padding:0;transition:0.3s;}
+    .dark-mode {background:#1e1e1e;color:#f1f1f1;}
+    .banner {background:linear-gradient(135deg,#2A4D9B,#7A77FF);color:#fff;text-align:center;padding:40px 20px;font-size:28px;font-weight:700;}
+    .container {padding:20px;}
+    h1 {text-align:center;color:#2A4D9B;margin:20px 0;}
+    .dark-mode h1 {color:#eee;}
+    .card {background:#fff;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,0.08);padding:15px;margin-bottom:40px;transition:0.3s;}
+    .dark-mode .card {background:#2a2a2a;color:#fff;}
+    table {width:100%;border-collapse:collapse;}
+    th,td {padding:10px;text-align:center;}
+    th {background:#2A4D9B;color:#fff;}
+    .dark-mode th {background:#444;}
+    td {border-bottom:1px solid #eee;font-size:14px;cursor:pointer;}
+    .dark-mode td {border-bottom:1px solid #444;}
+    .scroll-table {max-height:400px;overflow:auto;}
+    input[type="text"] {width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #ccc;}
+    .toggle-btn {position:absolute;top:15px;left:15px;padding:8px 14px;border:none;border-radius:8px;background:#2A4D9B;color:#fff;cursor:pointer;}
+
+    /* Modal */
+    .modal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);justify-content:center;align-items:center;}
+    .modal-content {position:relative;padding:20px;border-radius:16px;max-width:400px;width:90%;transition:0.3s;color:#fff;text-align:center;overflow:hidden;}
+    .dark-mode .modal-content {background:#2a2a2a;color:#fff;}
+    .close-btn {margin-top:15px;padding:8px 14px;border:none;border-radius:8px;background:#2A4D9B;color:#fff;cursor:pointer;}
+
+    /* Progress Bars */
+    .progress {background:#eee;border-radius:8px;height:14px;overflow:hidden;margin-bottom:10px;}
+    .bar {height:100%;background:#7A77FF;}
+    .label {font-size:14px;margin-bottom:4px;display:block;}
+
+    /* ✨ Shine Effect */
+    .modal-content::before {
+      content:"";
+      position:absolute;
+      top:0; left:-75%;
+      width:50%; height:100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
+      transform: skewX(-25deg);
+      animation: shine 3s infinite;
+    }
+    @keyframes shine {
+      0% { left:-75%; }
+      100% { left:125%; }
+    }
+
+    /* 🏷️ Badge Watermark */
+    .watermark-badge {
+      position:absolute;
+      bottom:15px;
+      left:15px;
+      font-family:'Orbitron', sans-serif;
+      font-size:18px;
+      font-weight:700;
+      color:rgba(255,255,255,0.9);
+      background:rgba(0,0,0,0.5);
+      padding:4px 10px;
+      border-radius:6px;
+      letter-spacing:2px;
+    }
+
+    /* 🎨 خلفيات المستويات */
+    .rank-beginner     { background:linear-gradient(135deg,#e0e0e0,#bdbdbd,#9e9e9e); }
+    .rank-pro          { background:linear-gradient(135deg,#2196f3,#0d47a1,#64b5f6); }
+    .rank-vip          { background:linear-gradient(135deg,#ffd700,#f5af19,#ff9800); }
+    .rank-vipplus      { background:linear-gradient(135deg,#b8860b,#5d4037,#000); }
+    .rank-svip         { background:linear-gradient(135deg,#8e24aa,#6a1b9a,#311b92); }
+    .rank-ssvip        { background:linear-gradient(135deg,#d32f2f,#b71c1c,#880e4f); }
+    .rank-ssvipsilver  { background:linear-gradient(135deg,#cfd8dc,#b0bec5,#90a4ae); color:#000; }
+    .rank-ssvipgold    { background:linear-gradient(135deg,#ffd700,#f9a825,#ff6f00); color:#000; }
+  </style>
+</head>
+<body>
+  <button class="toggle-btn" onclick="toggleDarkMode()">🌙 الوضع الليلي</button>
+  <div class="banner">🎉 حدث الترقيات 🎉</div>
+
+  <div class="container">
+    <h1>📢 جدول الترقيات</h1>
+    <div class="card">
+      <table>
+        <thead>
+          <tr><th>الترقية</th><th>الشروط</th><th>المزايا</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>مبتدئ</td><td>0–10999 فاصوليا، دعوة 1، تقييم 0.5</td><td>2% مكافأة</td></tr>
+          <tr><td>محترف</td><td>11000–49999 فاصوليا، 2–3 دعوات، تقييم 1–1.5</td><td>4% مكافأة</td></tr>
+          <tr><td>VIP</td><td>50000–99999 فاصوليا، 3–5 دعوات، تقييم 1.5–3</td><td>6% + 👑 تاج 7 أيام</td></tr>
+          <tr><td>VIP+</td><td>100000–219999 فاصوليا، 6–8 دعوات، تقييم 3–4</td><td>8% + 👑 تاج 14 يوم + 🌱 500 فاصوليا</td></tr>
+          <tr><td>SVIP</td><td>220000–549999 فاصوليا، 9–12 دعوات، تقييم 4–5.5</td><td>8% + 🐆 الفهد المطلق</td></tr>
+          <tr><td>SSVIP</td><td>550000–999999 فاصوليا، 15–20 دعوات، تقييم 5</td><td>9% + 🦅 الصقر + 🎟️ قسيمة 25$</td></tr>
+          <tr><td>SSVIP Silver</td><td>1000000–4999999 فاصوليا، 20 دعوة، تقييم 5</td><td>12% + 🎟️ قسيمة 100$</td></tr>
+          <tr><td>SSVIP Gold</td><td>5000000–10000000 فاصوليا، 20 دعوة، تقييم 5</td><td>15% + 🎟️ قسيمة 250$</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h1>🎤 جدول المذيعين</h1>
+    <input type="text" id="searchInput" placeholder="🔍 ابحث بالاسم / UID / Likee ID">
+    <div class="card scroll-table">
+      <table id="broadcasterTable">
+        <thead>
+          <tr><th>الاسم</th><th>UID</th><th>Likee ID</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="modal" id="profileModal">
+    <div class="modal-content" id="modalCard">
+      <h2 id="modalName"></h2>
+      <p><b>UID:</b> <span id="modalUID"></span></p>
+      <p><b>Likee ID:</b> <span id="modalLikee"></span></p>
+
+      <div class="label">⏱️ الساعات <span id="labelHours"></span></div>
+      <div class="progress"><div id="barHours" class="bar"></div></div>
+
+      <div class="label">📅 الأيام <span id="labelDays"></span></div>
+      <div class="progress"><div id="barDays" class="bar"></div></div>
+
+      <div class="label">🌱 الفاصوليا <span id="labelBeans"></span></div>
+      <div class="progress"><div id="barBeans" class="bar"></div></div>
+
+      <div class="label">🙋 الدعوات <span id="labelInvites"></span></div>
+      <div class="progress"><div id="barInvites" class="bar"></div></div>
+
+      <p><b>التصنيف الحالي:</b> <span id="modalRank"></span></p>
+      <p><b>المميزات:</b> <span id="modalBenefits"></span></p>
+      <p><b>الباقي على الترقية:</b> <span id="modalNext"></span></p>
+
+      <button class="close-btn" onclick="closeModal()">إغلاق</button>
+      <span class="watermark-badge" id="modalWatermark"></span>
+    </div>
+  </div>
+
+  <script>
+    const upgrades = [
+      {rank:"مبتدئ",en:"BEGINNER",min:0,max:10999,benefits:"2% مكافأة",next:"محترف",invites:[1,1]},
+      {rank:"محترف",en:"PRO",min:11000,max:49999,benefits:"4% مكافأة",next:"VIP",invites:[2,3]},
+      {rank:"VIP",en:"VIP",min:50000,max:99999,benefits:"6% + 👑 تاج 7 أيام",next:"VIP+",invites:[3,5]},
+      {rank:"VIP+",en:"VIP+",min:100000,max:219999,benefits:"8% + 👑 تاج 14 يوم + 🌱 500 فاصوليا",next:"SVIP",invites:[6,8]},
+      {rank:"SVIP",en:"SVIP",min:220000,max:549999,benefits:"8% + 🐆 الفهد المطلق",next:"SSVIP",invites:[9,12]},
+      {rank:"SSVIP",en:"SSVIP",min:550000,max:999999,benefits:"9% + 🦅 الصقر + 🎟️ قسيمة 25$",next:"SSVIP Silver",invites:[15,20]},
+      {rank:"SSVIP Silver",en:"SSVIP SILVER",min:1000000,max:4999999,benefits:"12% + 🎟️ قسيمة 100$",next:"SSVIP Gold",invites:[20,20]},
+      {rank:"SSVIP Gold",en:"SSVIP GOLD",min:5000000,max:10000000,benefits:"15% + 🎟️ قسيمة 250$",next:"-",invites:[20,20]}
+    ];
+
+    function getRankClass(rank){
+      switch(rank){
+        case "مبتدئ": return "rank-beginner";
+        case "محترف": return "rank-pro";
+        case "VIP": return "rank-vip";
+        case "VIP+": return "rank-vipplus";
+        case "SVIP": return "rank-svip";
+        case "SSVIP": return "rank-ssvip";
+        case "SSVIP Silver": return "rank-ssvipsilver";
+        case "SSVIP Gold": return "rank-ssvipgold";
+        default: return "";
+      }
+    }
+
+    function toggleDarkMode(){ document.body.classList.toggle("dark-mode"); }
+
+    fetch("broadcasters.json?nocache=" + Date.now())
+      .then(res=>res.json())
+      .then(data=>{
+        const tbody=document.querySelector("#broadcasterTable tbody");
+        tbody.innerHTML="";
+        data.forEach(b=>{
+          let tr=document.createElement("tr");
+          tr.dataset.beans=b.beans;
+          tr.dataset.hours=b.hours;
+          tr.dataset.days=b.days;
+          tr.dataset.invites=b.invites;
+          tr.innerHTML=`<td>${b.name}</td><td>${b.uid}</td><td>${b.likee}</td>`;
+          tbody.appendChild(tr);
+        });
+        attachModalEvents();
+      });
+
+    function attachModalEvents(){
+      document.querySelectorAll("#broadcasterTable tbody tr").forEach(row=>{
+        row.cells[0].addEventListener("click", ()=>{
+          let name=row.cells[0].innerText;
+          let uid=row.cells[1].innerText;
+          let likee=row.cells[2].innerText;
+          let beans=parseInt(row.dataset.beans);
+          let hours=parseInt(row.dataset.hours);
+          let days=parseInt(row.dataset.days);
+          let invites=parseInt(row.dataset.invites);
+
+          let current=upgrades.find(u=>beans>=u.min && beans<=u.max);
+          let next=upgrades.find(u=>u.rank===current.next);
+
+          document.getElementById("modalName").textContent=name;
+          document.getElementById("modalUID").textContent=uid;
+          document.getElementById("modalLikee").textContent=likee;
+          document.getElementById("modalRank").textContent=current.rank;
+          document.getElementById("modalBenefits").textContent=current.benefits;
+
+          if(next){
+            let remain=next.min-beans;
+            document.getElementById("modalNext").textContent=`باقي ${remain} فاصوليا لـ ${next.rank}`;
+            document.getElementById("barBeans").style.width=((beans-current.min)/(next.min-current.min)*100)+"%";
+            document.getElementById("labelBeans").textContent=`${beans} / ${next.min}`;
+          } else {
+            document.getElementById("modalNext").textContent="أعلى مستوى 🎉";
+            document.getElementById("barBeans").style.width="100%";
+            document.getElementById("labelBeans").textContent=`${beans}`;
+          }
+
+          document.getElementById("barHours").style.width=(hours/31*100)+"%";
+          document.getElementById("labelHours").textContent=`${hours} / 31`;
+
+          document.getElementById("barDays").style.width=(days/11*100)+"%";
+          document.getElementById("labelDays").textContent=`${days} / 11`;
+
+          let invitesReq=current.invites?current.invites[1]:20;
+          document.getElementById("barInvites").style.width=(invites/invitesReq*100)+"%";
+          document.getElementById("labelInvites").textContent=`${invites} / ${invitesReq}`;
+
+          let modal=document.getElementById("modalCard");
+          modal.className="modal-content "+getRankClass(current.rank);
+          document.getElementById("modalWatermark").textContent=current.en;
+
+          document.getElementById("profileModal").style.display="flex";
+        });
+      });
+    }
+
+    document.getElementById("searchInput").addEventListener("keyup", function(){
+      let filter=this.value.toLowerCase();
+      document.querySelectorAll("#broadcasterTable tbody tr").forEach(row=>{
+        row.style.display=row.innerText.toLowerCase().includes(filter)? "":"none";
+      });
+    });
+
+    function closeModal(){document.getElementById("profileModal").style.display="none";}
+    window.onclick=e=>{if(e.target==document.getElementById("profileModal"))closeModal();}
+  </script>
+</body>
+</html>
