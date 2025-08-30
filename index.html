@@ -5,120 +5,128 @@
   <title>📢 حدث الترقيات</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <style>
-    body {font-family:'Cairo',sans-serif;background:#f9f9fb;color:#333;margin:0;padding:0;transition:0.3s;}
-    .dark-mode {background:#1e1e1e;color:#f1f1f1;}
-    .banner {background:linear-gradient(135deg,#2A4D9B,#7A77FF);color:#fff;text-align:center;padding:40px 20px;font-size:28px;font-weight:700;}
-    .container {padding:20px;}
-    h1 {text-align:center;color:#2A4D9B;margin:20px 0;}
-    .dark-mode h1 {color:#eee;}
-    .card {background:#fff;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,0.08);padding:15px;margin-bottom:40px;transition:0.3s;}
-    .dark-mode .card {background:#2a2a2a;color:#fff;}
-    table {width:100%;border-collapse:collapse;}
-    th,td {padding:10px;text-align:center;}
-    th {background:#2A4D9B;color:#fff;}
-    .dark-mode th {background:#444;}
-    td {border-bottom:1px solid #eee;font-size:14px;cursor:pointer;}
-    .dark-mode td {border-bottom:1px solid #444;}
-    .scroll-table {max-height:400px;overflow:auto;}
-    input[type="text"] {width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #ccc;}
-    .toggle-btn {position:absolute;top:15px;left:15px;padding:8px 14px;border:none;border-radius:8px;background:#2A4D9B;color:#fff;cursor:pointer;}
-
-    /* Modal */
-    .modal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);justify-content:center;align-items:center;}
-    .modal-content {
-      position:relative;
-      padding:100px 20px 30px 20px; /* مساحة فوق للصورة */
-      border-radius:16px;
-      max-width:420px;
-      max-height:90vh;   /* ما يتعداش الشاشة */
-      overflow-y:auto;   /* Scroll داخلي */
-      width:95%;
+    body {
+      font-family:'Cairo',sans-serif;
+      background: linear-gradient(135deg, #d9c3a0, #f5f0e6); /* كافيه + بيج */
+      color:#3e2f2f; /* بني غامق */
+      margin:0;
+      padding:0;
+      transition:0.3s;
+    }
+    .dark-mode {
+      background: linear-gradient(135deg, #2e2e2e, #1a1a1a);
+      color:#f5f5f5;
+    }
+    .banner {
+      background: linear-gradient(135deg, #6f4e37, #cbb994);
       color:#fff;
       text-align:center;
-      overflow-x:hidden;
+      padding:40px 20px;
+      font-size:28px;
+      font-weight:700;
+      position:relative;
+      overflow:hidden;
     }
-    .dark-mode .modal-content {background:#2a2a2a;color:#fff;}
-    .close-btn {margin-top:15px;padding:8px 14px;border:none;border-radius:8px;background:#2A4D9B;color:#fff;cursor:pointer;}
-
-    /* صورة دائرية Pop-Out */
-    .profile-pic {
-      width:120px;
-      height:120px;
-      border-radius:50%;
-      border:5px solid #fff;
-      position:absolute;
-      top:-60px; /* نصها فوق البطاقة */
-      left:50%;
-      transform:translateX(-50%);
-      object-fit:cover;
-      z-index:2;
-    }
-
-    /* Progress Bars */
-    .progress {background:#eee;border-radius:8px;height:14px;overflow:hidden;margin-bottom:10px;}
-    .bar {height:100%;background:#7A77FF;}
-    .label {font-size:14px;margin-bottom:4px;display:block;}
-
-    /* ✨ Shine Effect */
-    .modal-content::before {
+    .banner::after {
       content:"";
       position:absolute;
-      top:0; left:-75%;
-      width:50%; height:100%;
-      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
+      top:0;left:-75%;
+      width:50%;height:100%;
+      background: linear-gradient(120deg, transparent, rgba(255,215,0,0.4), transparent);
       transform: skewX(-25deg);
-      animation: shine 3s infinite;
+      animation: shine 4s infinite;
     }
     @keyframes shine {
       0% { left:-75%; }
       100% { left:125%; }
     }
+    .container {padding:20px;}
+    h1 {text-align:center;color:#6f4e37;margin:20px 0;}
+    .dark-mode h1 {color:#f5f5f5;}
+    .card {
+      background:#fefaf4;
+      border-radius:16px;
+      box-shadow:0 4px 12px rgba(111,78,55,0.25);
+      padding:15px;
+      margin-bottom:40px;
+      transition:0.3s;
+    }
+    .dark-mode .card {background:#2a2a2a;color:#fff;}
+    table {width:100%;border-collapse:collapse;}
+    th,td {padding:10px;text-align:center;}
+    th {background:#6f4e37;color:#fff;}
+    .dark-mode th {background:#444;}
+    td {border-bottom:1px solid #eee;font-size:14px;cursor:pointer;}
+    .dark-mode td {border-bottom:1px solid #444;}
+    .scroll-table {max-height:400px;overflow:auto;}
+    input[type="text"] {
+      width:100%;padding:10px;margin-bottom:10px;
+      border-radius:8px;border:1px solid #c7b299;
+    }
+    .toggle-btn {
+      position:absolute;top:15px;left:15px;
+      padding:8px 14px;
+      border:none;border-radius:8px;
+      background:#6f4e37;color:#fff;cursor:pointer;
+    }
+    .toggle-btn:hover {background:#4a3527;}
 
-    /* 🏷️ Watermark */
-    .watermark-badge {
-      position:absolute;
-      bottom:15px;
-      left:15px;
-      font-family:'Orbitron', sans-serif;
-      font-size:20px;
-      font-weight:700;
-      letter-spacing:3px;
+    /* Modal */
+    .modal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);justify-content:center;align-items:center;}
+    .modal-content {
+      position:relative;padding:100px 20px 30px;
+      border-radius:16px;max-width:420px;max-height:90vh;
+      overflow-y:auto;width:95%;
+      color:#fff;text-align:center;overflow-x:hidden;
+    }
+    .dark-mode .modal-content {background:#2a2a2a;color:#fff;}
+    .close-btn {
+      margin-top:15px;padding:8px 14px;
+      border:none;border-radius:8px;
+      background:#cbb994;color:#3e2f2f;
+      font-weight:bold;cursor:pointer;
+    }
+    .close-btn:hover {background:#bfa06a;color:#fff;}
+
+    /* صورة دائرية Pop-Out */
+    .profile-pic {
+      width:120px;height:120px;border-radius:50%;
+      border:5px solid #fff;
+      position:absolute;top:-60px;left:50%;
+      transform:translateX(-50%);
+      object-fit:cover;z-index:2;
     }
 
-    /* 🎨 خلفيات المستويات */
-    .rank-beginner     { background:linear-gradient(135deg,#e0e0e0,#bdbdbd,#9e9e9e); }
-    .rank-pro          { background:linear-gradient(135deg,#2196f3,#0d47a1,#64b5f6); }
-    .rank-vip          { background:linear-gradient(135deg,#ffd700,#f5af19,#ff9800); }
-    .rank-vipplus      { background:linear-gradient(135deg,#b8860b,#5d4037,#000); }
-    .rank-svip         { background:linear-gradient(135deg,#8e24aa,#6a1b9a,#311b92); }
-    .rank-ssvip        { background:linear-gradient(135deg,#d32f2f,#b71c1c,#880e4f); }
-    .rank-ssvipsilver  { background:linear-gradient(135deg,#cfd8dc,#b0bec5,#90a4ae); color:#000; }
-    .rank-ssvipgold    { background:linear-gradient(135deg,#ffd700,#f9a825,#ff6f00); color:#000; }
+    /* Progress Bars */
+    .progress {
+      background:#e6d9c3;
+      border-radius:8px;
+      height:14px;
+      overflow:hidden;
+      margin-bottom:10px;
+    }
+    .bar {
+      height:100%;
+      background:linear-gradient(90deg,#bfa06a,#d4af37,#b8860b); /* دهبي */
+    }
+    .label {font-size:14px;margin-bottom:4px;display:block;}
 
-    /* 🌟 Pulse Glow متزامن (Watermark + صورة) */
-    .rank-beginner #modalWatermark, .rank-beginner .profile-pic { animation: pulseGray 3s ease-in-out infinite; }
-    @keyframes pulseGray { 0%,100% { color:#999; box-shadow:0 0 10px #aaa,0 0 20px #666; } 50% { color:#eee; box-shadow:0 0 20px #fff,0 0 35px #ccc; } }
+    /* ✨ Shine Effect */
+    .modal-content::before {
+      content:"";
+      position:absolute;top:0;left:-75%;
+      width:50%;height:100%;
+      background: linear-gradient(120deg, transparent, rgba(255,215,0,0.3), transparent);
+      transform: skewX(-25deg);
+      animation: shine 3s infinite;
+    }
 
-    .rank-pro #modalWatermark, .rank-pro .profile-pic { animation: pulseBlue 3s ease-in-out infinite; }
-    @keyframes pulseBlue { 0%,100% { color:#1976d2; box-shadow:0 0 10px #1565c0,0 0 20px #1976d2; } 50% { color:#64b5f6; box-shadow:0 0 20px #90caf9,0 0 35px #2196f3; } }
-
-    .rank-vip #modalWatermark, .rank-vip .profile-pic { animation: pulseGold 3s ease-in-out infinite; }
-    @keyframes pulseGold { 0%,100% { color:#c8a600; box-shadow:0 0 10px #b8860b,0 0 20px #ffd54f; } 50% { color:#ffd700; box-shadow:0 0 20px #ffeb3b,0 0 40px #ffd700; } }
-
-    .rank-vipplus #modalWatermark, .rank-vipplus .profile-pic { animation: pulseBronze 3s ease-in-out infinite; }
-    @keyframes pulseBronze { 0%,100% { color:#795548; box-shadow:0 0 10px #5d4037,0 0 20px #795548; } 50% { color:#d7ccc8; box-shadow:0 0 20px #efebe9,0 0 40px #bcaaa4; } }
-
-    .rank-svip #modalWatermark, .rank-svip .profile-pic { animation: pulsePurple 3s ease-in-out infinite; }
-    @keyframes pulsePurple { 0%,100% { color:#6a1b9a; box-shadow:0 0 10px #4a148c,0 0 20px #6a1b9a; } 50% { color:#ba68c8; box-shadow:0 0 20px #ce93d8,0 0 40px #8e24aa; } }
-
-    .rank-ssvip #modalWatermark, .rank-ssvip .profile-pic { animation: pulseRed 3s ease-in-out infinite; }
-    @keyframes pulseRed { 0%,100% { color:#b71c1c; box-shadow:0 0 10px #880e4f,0 0 20px #b71c1c; } 50% { color:#ef5350; box-shadow:0 0 20px #ef9a9a,0 0 40px #c62828; } }
-
-    .rank-ssvipsilver #modalWatermark, .rank-ssvipsilver .profile-pic { animation: pulseSilver 3s ease-in-out infinite; }
-    @keyframes pulseSilver { 0%,100% { color:#757575; box-shadow:0 0 10px #90a4ae,0 0 20px #757575; } 50% { color:#e0e0e0; box-shadow:0 0 20px #eceff1,0 0 40px #cfd8dc; } }
-
-    .rank-ssvipgold #modalWatermark, .rank-ssvipgold .profile-pic { animation: pulseGoldBadge 3s ease-in-out infinite; }
-    @keyframes pulseGoldBadge { 0%,100% { color:#c57f00; box-shadow:0 0 10px #ff8f00,0 0 20px #c57f00; } 50% { color:#ffd600; box-shadow:0 0 20px #ffeb3b,0 0 40px #ffc107; } }
+    /* Watermark */
+    .watermark-badge {
+      position:absolute;bottom:15px;left:15px;
+      font-family:'Orbitron', sans-serif;
+      font-size:20px;font-weight:700;letter-spacing:3px;
+    }
   </style>
 </head>
 <body>
