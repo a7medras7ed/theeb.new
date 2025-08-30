@@ -7,37 +7,32 @@
   <style>
     body {
       font-family:'Cairo',sans-serif;
-      background: linear-gradient(-45deg, #d9c3a0, #f5f0e6, #bfa06a, #6f4e37);
-      background-size: 400% 400%;
-      animation: gradientShift 15s ease infinite;
+      background: linear-gradient(135deg, #d9c3a0, #f5f0e6); /* كافيه + بيج */
       color:#3e2f2f;
       margin:0;padding:0;
       transition:0.3s;
-    }
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
     .dark-mode {
       background: linear-gradient(135deg, #2e2e2e, #1a1a1a);
       color:#f5f5f5;
     }
     .banner {
-      background: rgba(111, 78, 55, 0.85);
+      background: linear-gradient(135deg, #6f4e37, #cbb994);
       color:#fff;text-align:center;
-      padding:60px 20px;
+      padding:40px 20px;
       font-size:28px;font-weight:700;
       position:relative;overflow:hidden;
     }
-    #particles {
-      position:absolute;
-      top:0;left:0;width:100%;height:100%;
-      pointer-events:none;
-      z-index:0;
+    .banner::after {
+      content:"";position:absolute;top:0;left:-75%;
+      width:50%;height:100%;
+      background: linear-gradient(120deg, transparent, rgba(255,215,0,0.4), transparent);
+      transform: skewX(-25deg);
+      animation: shine 4s infinite;
     }
-    .banner span {position:relative;z-index:1;}
-    .container {padding:20px;position:relative;z-index:1;}
+    @keyframes shine {0%{left:-75%;}100%{left:125%;}}
+
+    .container {padding:20px;}
     h1 {text-align:center;color:#6f4e37;margin:20px 0;}
     .dark-mode h1 {color:#f5f5f5;}
     .card {
@@ -46,7 +41,6 @@
       box-shadow:0 4px 12px rgba(111,78,55,0.25);
       padding:15px;margin-bottom:40px;
       transition:0.3s;
-      position:relative;z-index:1;
     }
     .dark-mode .card {background:#2a2a2a;color:#fff;}
     table {width:100%;border-collapse:collapse;}
@@ -73,8 +67,10 @@
       position:relative;
       padding:100px 20px 30px;
       border-radius:16px;
-      max-width:420px;max-height:90vh;
-      overflow-y:auto;width:95%;text-align:center;
+      max-width:420px;
+      max-height:90vh;
+      overflow-y:auto;
+      width:95%;text-align:center;
       overflow-x:hidden;
     }
     .dark-mode .modal-content {background:#2a2a2a;color:#fff;}
@@ -103,12 +99,21 @@
     }
     .bar {
       height:100%;
-      background:linear-gradient(90deg,#bfa06a,#d4af37,#b8860b);
+      background:linear-gradient(90deg,#bfa06a,#d4af37,#b8860b); /* دهبي */
     }
     .label {
       font-size:14px;margin-bottom:4px;
       display:block;color:#d4af37;
       font-weight:bold;
+    }
+
+    /* Shine Effect */
+    .modal-content::before {
+      content:"";position:absolute;top:0;left:-75%;
+      width:50%;height:100%;
+      background: linear-gradient(120deg, transparent, rgba(255,215,0,0.3), transparent);
+      transform: skewX(-25deg);
+      animation: shine 3s infinite;
     }
 
     /* Watermark */
@@ -131,10 +136,7 @@
 </head>
 <body>
   <button class="toggle-btn" onclick="toggleDarkMode()">🌙 الوضع الليلي</button>
-  <div class="banner">
-    <span>🎉 حدث الترقيات 🎉</span>
-    <canvas id="particles"></canvas>
-  </div>
+  <div class="banner">🎉 حدث الترقيات 🎉</div>
 
   <div class="container">
     <h1>📢 جدول الترقيات</h1>
@@ -225,7 +227,6 @@
 
     function toggleDarkMode(){ document.body.classList.toggle("dark-mode"); }
 
-    // تحميل جدول المذيعين
     fetch("broadcasters.json?nocache=" + Date.now())
       .then(res=>res.json())
       .then(data=>{
@@ -305,31 +306,6 @@
 
     function closeModal(){document.getElementById("profileModal").style.display="none";}
     window.onclick=e=>{if(e.target==document.getElementById("profileModal"))closeModal();}
-
-    // ✨ نجوم متحركة في البانر
-    const canvas=document.getElementById("particles");
-    const ctx=canvas.getContext("2d");
-    function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=document.querySelector(".banner").offsetHeight;}
-    resizeCanvas();window.addEventListener("resize",resizeCanvas);
-
-    let stars=[];
-    for(let i=0;i<40;i++){
-      stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,radius:Math.random()*2,speed:0.2+Math.random()*0.3});
-    }
-
-    function animateStars(){
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      ctx.fillStyle="rgba(255,223,0,0.8)";
-      stars.forEach(s=>{
-        ctx.beginPath();
-        ctx.arc(s.x,s.y,s.radius,0,Math.PI*2);
-        ctx.fill();
-        s.y+=s.speed;
-        if(s.y>canvas.height){s.y=0;s.x=Math.random()*canvas.width;}
-      });
-      requestAnimationFrame(animateStars);
-    }
-    animateStars();
   </script>
 </body>
 </html>
