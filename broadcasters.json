@@ -1,68 +1,5 @@
 [
   {
-    "name": "الشيخ ابوعدى",
-    "uid": "560282169",
-    "likee": "560282169",
-    "beans": 20000,
-    "hours": 15,
-    "days": 7,
-    "invites": 3,
-  },
-  {
-    "name": "أنا الشيخه",
-    "uid": "2618365249",
-    "likee": "53Asm",
-    "beans": 55000,
-    "hours": 20,
-    "days": 9,
-    "invites": 4,
-  },
-  {
-    "name": "باشممرضه",
-    "uid": "2633671921",
-    "likee": "memss1234",
-    "beans": 120000,
-    "hours": 22,
-    "days": 10,
-    "invites": 6,
-  },
-  {
-    "name": "MR.Maan",
-    "uid": "403477534",
-    "likee": "bhgvbngv",
-    "beans": 250000,
-    "hours": 27,
-    "days": 11,
-    "invites": 9,
-  },
-  {
-    "name": "بكار الاهلاوي",
-    "uid": "1110386682",
-    "likee": "Gogo100100",
-    "beans": 600000,
-    "hours": 30,
-    "days": 11,
-    "invites": 15,
-  },
-  {
-    "name": "جاسمن Theeb",
-    "uid": "1167433407",
-    "likee": "53A277A",
-    "beans": 1200000,
-    "hours": 28,
-    "days": 10,
-    "invites": 20,
-  },
-  {
-    "name": "KitKat",
-    "uid": "1116979658",
-    "likee": "F1672016",
-    "beans": 5100000,
-    "hours": 31,
-    "days": 11,
-    "invites": 20,
-  },
-  {
     "name": "زوزهᵀʰᵉᵉᵇ",
     "uid": "1127731659",
     "likee": "howl_522467",
@@ -70,6 +7,7 @@
     "hours": 16,
     "days": 8,
     "invites": 3,
+    "image": "https://via.placeholder.com/120"
   },
   {
     "name": "قمرᵀʰᵉᵉᵇ",
@@ -79,5 +17,6 @@
     "hours": 25,
     "days": 10,
     "invites": 10,
+    "image": "https://via.placeholder.com/120"
   }
 ]
